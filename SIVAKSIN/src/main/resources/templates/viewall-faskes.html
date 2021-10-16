@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Faskes')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Daftar Faskes</h2>
+</div>
+<div class="container-fluid isi">
+    <br>
+    <a th:href="@{/faskes/tambah}" class="mx-2 btn btn-dark">Tambah Faskes</a>
+    <br><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nomor Faskes</th>
+            <th>Nama</th>
+            <th>Kuota</th>
+            <th>Provinsi</th>
+            <th>Kabupaten</th>
+            <th>Jam Mulai</th>
+            <th>Jam Tutup</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="faskes, iterationStatus : ${listFaskes}"
+            th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${faskes.nama_faskes}"></td>
+            <td th:text="${faskes.kuota}"></td>
+            <td th:text="${faskes.provinsi}"></td>
+            <td th:text="${faskes.kabupaten}"></td>
+            <td th:text="${faskes.mulai}"></td>
+            <td th:text="${faskes.tutup}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/faskes/} + ${faskes.id_faskes}">
+                    Lihat</a>
+                <a class="btn btn-primary" th:href="@{/faskes/ubah/} + ${faskes.id_faskes}">
+                    Ubah</a>
+                <a class="btn btn-primary" th:href="@{/faskes/hapus/} + ${faskes.id_faskes}">
+                    Hapus</a>
+            </td>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

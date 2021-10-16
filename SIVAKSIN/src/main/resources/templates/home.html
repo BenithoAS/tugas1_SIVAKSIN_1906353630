@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Home')"></nav>
+
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Selamat datang di SIVAKSIN</h2>
+</div>
+
+<div class="container-fluid isi">
+    <div class="d-flex justify-content-center">
+        <div class="m-4">
+            <div class="d-flex justify-content-center">
+                <h4>Daftar Fitur</h4>
+            </div>
+            <div class="my-3 d-flex justify-content-center">
+                <a th:href="@{/faskes}" class="mx-2 btn btn-dark" >Fasilitas Kesehatan</a>
+                <a th:href="@{/pasien}" class="mx-2 btn btn-dark">Pasien</a>
+                <a th:href="@{/cari}" class="mx-2 btn btn-dark">Cari</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

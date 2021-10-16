@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Faskes')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 th:text="'Faskes dengan nama ' + ${nama_faskes} + ' ' + ${ms} + ' dihapus'" style="text-align: center; color: #ececf6"></h2>
+</div>
+<br><br>
+<div class="container-fluid isi">
+    <div class="d-flex justify-content-center">
+        <div class="m-4">
+            <a class="btn btn-primary" href="/">Kembali ke Home</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

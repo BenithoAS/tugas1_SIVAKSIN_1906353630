@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Cari')"></nav>
+
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Daftar Fasilitas  Kesehatan  berdasarkan  Vaksin</h2>
+</div>
+<div class="container-fluid isi">
+    <br>
+    <form th:action="@{/cari/pasien}" method="GET">
+        Pilih Jenis Vaksin : <br>
+        <select name="jenisVaksin">
+            <div th:each="vaksin : ${listVaksin}">
+                <option th:text="${vaksin.jenis_vaksin}" th:value="${vaksin.jenis_vaksin}"></option>
+            </div>
+        </select>
+        <br><br>
+
+        Pilih Faskes : <br>
+        <select name="namaFaskes">
+            <div th:each="faskes : ${listFaskes}">
+                <option th:text="${faskes.nama_faskes}" th:value="${faskes.nama_faskes}"></option>
+            </div>
+        </select>
+        <br><br>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+        <br>
+    </form>
+
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NIK</th>
+                        <th>Nomor Telepon</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Batch ID</th>
+                        <th>Waktu Suntik</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dokterPasien, iterationStatus : ${listDokterPasien}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${dokterPasien.pasien.nama_pasien}"></td>
+                        <td th:text="${dokterPasien.pasien.nik}"></td>
+                        <td th:text="${dokterPasien.pasien.nomor_telepon}"></td>
+                        <td th:if="${dokterPasien.pasien.jenis_kelamin} == 1">Laki-laki</td>
+                        <td th:if="${dokterPasien.pasien.jenis_kelamin} == 2">Perempuan</td>
+                        <td th:text="${dokterPasien.batch_id}"></td>
+                        <td th:text="${dokterPasien.waktu_suntik}"></td>
+                    </tbody>
+                </table>
+                <br>
+                <a th:href="@{/cari}" class="mx-2 btn btn-dark">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

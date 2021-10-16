@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Pasien')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Daftar Pasien</h2>
+</div>
+<div class="container-fluid isi">
+    <br>
+    <a th:href="@{/pasien/tambah}" class="mx-2 btn btn-dark">Tambah Pasien</a>
+    <br><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIK</th>
+            <th>Nomor Telepon</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Lahir</th>
+            <th>Tempat Lahir</th>
+            <th>Pekerjaan</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pasien, iterationStatus : ${listPasien}"
+            th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${pasien.nama_pasien}"></td>
+            <td th:text="${pasien.nik}"></td>
+            <td th:text="${pasien.nomor_telepon}"></td>
+            <td th:if="${pasien.jenis_kelamin} == 1">Laki-laki</td>
+            <td th:if="${pasien.jenis_kelamin} == 2">Perempuan</td>
+            <td th:text="${pasien.tanggalLahir}"></td>
+            <td th:text="${pasien.tempat_lahir}"></td>
+            <td th:text="${pasien.pekerjaan}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/pasien/} + ${pasien.id_pasien}">
+                    Lihat</a>
+                <a class="btn btn-primary" th:href="@{/pasien/ubah/} + ${pasien.id_pasien}">
+                    Ubah</a>
+            </td>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

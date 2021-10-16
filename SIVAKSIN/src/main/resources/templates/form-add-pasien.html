@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Pasien')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Tambah Pasien</h2>
+</div>
+<br><br>
+<div class="container-fluid isi justify-content-center">
+    <form th:action="@{/pasien/tambah}" th:object="${pasien}" method="POST">
+        Nama Pasien : <br>
+        <input required class="form-control" type="text" name="nama_pasien"/>
+        <br><br>
+
+        NIK : <br>
+        <input required class="form-control" type="text" name="nik"/>
+        <br><br>
+
+        Nomor Telepon : <br>
+        <input required class="form-control" type="text" name="nomor_telepon"/>
+        <br><br>
+
+        Jenis Kelamin : <br>
+        <select name="jenis_kelamin">
+            <option value="1">Laki-laki</option>
+            <option value="2">Perempuan</option>
+        </select>
+        <br><br>
+
+        Tanggal Lahir : <br>
+        <input required class="form-control" type="datetime-local" name="tanggalLahir" />
+        <br><br>
+
+        Tempat Lahir : <br>
+        <input required class="form-control" type="text" name="tempat_lahir"/>
+        <br><br>
+
+        Pekerjaan : <br>
+        <input required class="form-control" type="text" name="pekerjaan"/>
+        <br><br>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <a class="btn btn-primary" href="/">Cancel</a>
+    </form>
+    <br><br>
+</div>
+</body>
+</html>

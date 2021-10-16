@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>SIVAKSIN</title>
+  <meta charset="UTF-8">
+  <title> Home </title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Cari')"></nav>
+
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+  <h2 style="text-align: center; color: #ececf6">Daftar Fasilitas  Kesehatan  berdasarkan  Vaksin</h2>
+</div>
+<div class="container-fluid isi">
+  <br>
+  Pilih Jenis Vaksin : <br>
+  <form th:action="@{/cari/faskes}" method="GET">
+    <select name="jenisVaksin">
+      <div th:each="vaksin : ${listVaksin}">
+        <option th:text="${vaksin.jenis_vaksin}" th:value="${vaksin.jenis_vaksin}"></option>
+      </div>
+    </select>
+    <br><br>
+    <button class="btn btn-outline-dark" type="submit">Search</button>
+    <br><br>
+  </form>
+
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Kuota</th>
+            <th>Provinsi</th>
+            <th>Kabupaten</th>
+            <th>Jam Mulai</th>
+            <th>Jam Selesai</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="faskes, iterationStatus : ${listFaskes}"
+              th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${faskes.nama_faskes}"></td>
+            <td th:text="${faskes.kuota}"></td>
+            <td th:text="${faskes.provinsi}"></td>
+            <td th:text="${faskes.kabupaten}"></td>
+            <td th:text="${faskes.mulai}"></td>
+            <td th:text="${faskes.tutup}"></td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

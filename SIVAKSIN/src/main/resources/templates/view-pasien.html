@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Pasien')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Detail Pasien</h2>
+</div>
+<br><br>
+<div class="container-fluid isi">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h6 th:text="'Nama Pasien : ' + ${pasien.nama_pasien}"></h6>
+                <h6 th:text="'NIK : ' + ${pasien.nik}"></h6>
+                <h6 th:text="'Nomor Telepon : ' + ${pasien.nomor_telepon}"></h6>
+                <h6 th:if="${pasien.jenis_kelamin} == 1">Jenis Kelamin : Laki-laki</h6>
+                <h6 th:if="${pasien.jenis_kelamin} == 2">Jenis Kelamin : Perempuan</h6>
+                <h6 th:text="'Tanggal Lahir : ' + ${pasien.tanggalLahir}"></h6>
+                <h6 th:text="'Tempat Lahir : ' + ${pasien.tempat_lahir}"></h6>
+                <h6 th:text="'Pekerjaan : ' + ${pasien.pekerjaan}"></h6>
+                <br>
+                <h4>Daftar Vaksinasi</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Faskes</th>
+                        <th>Batch ID</th>
+                        <th>Waktu Suntik</th>
+                        <th>Nama Dokter</th>
+                        <th>NIP Dokter</th>
+                        <th>No Telepon Dokter</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dokterPasien, iterationStatus : ${listDokterPasien}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${dokterPasien.id_faskes}"></td>
+                        <td th:text="${dokterPasien.batch_id}"></td>
+                        <td th:text="${dokterPasien.dokter.nama_dokter}"></td>
+                        <td th:text="${dokterPasien.dokter.nip}"></td>
+                        <td th:text="${dokterPasien.dokter.nomor_telepon}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <a th:href="@{/pasien}" class="mx-2 btn btn-dark">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

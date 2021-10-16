@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Faskes')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Update Faskes</h2>
+</div>
+<br><br>
+<div class="container-fluid isi justify-content-center">
+    <form th:action="@{/faskes/ubah}" th:object="${faskes}" method="POST">
+        <input type="hidden" th:field="*{id_faskes}" />
+
+        Nama Faskes : <br>
+        <input class="form-control" type="text" name="nama_faskes" th:value="*{nama_faskes}"/>
+        <br><br>
+
+        Kuota : <br>
+        <input class="form-control" type="text" name="kuota" th:value="*{kuota}"/>
+        <br><br>
+
+        Provinsi : <br>
+        <input class="form-control" type="text" name="provinsi" th:value="*{provinsi}"/>
+        <br><br>
+
+        Kabupaten : <br>
+        <input class="form-control" type="text" name="kabupaten" th:value="*{kabupaten}"/>
+        <br><br>
+
+        Waktu Buka : <br>
+        <input required class="form-control" type="time" name="mulai" th:value="*{mulai}"/>
+        <br><br>
+
+        Waktu Tutup : <br>
+        <input required class="form-control" type="time" name="tutup" th:value="*{tutup}" />
+        <br><br>
+
+        Jenis Vaksin : <br>
+        <select name="vaksin" th:if="${lsp} == 0" >
+            <div th:each="vaksin : ${listVaksin}">
+                <option th:text="${vaksin.jenis_vaksin}" th:value="${vaksin.id_vaksin}"></option>
+            </div>
+        </select>
+        <br><br>
+        <input th:if="${lsp} == 0"  type="hidden" th:field="*{vaksin}" />
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <a class="btn btn-primary" href="/faskes">Cancel</a>
+    </form>
+    <br><br>
+</div>
+</body>
+</html>

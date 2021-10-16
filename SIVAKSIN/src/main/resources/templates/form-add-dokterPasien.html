@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Faskes')"></nav>
+<div class="container-fluid header" style="background-color: #b21f2d; padding-top: 5%; padding-bottom: 5%">
+    <h2 style="text-align: center; color: #ececf6">Tambah Pasien Faskes</h2>
+</div>
+<br><br>
+<div class="container-fluid isi justify-content-center">
+    <form th:action="@{/faskes/tambah/pasien}" th:object="${dokterPasien}" method="POST">
+
+        <input type="hidden" th:field="*{id}" />
+
+        ID Faskes : <br>
+        <input required class="form-control" type="number" name="id_faskes" th:value="${id_faskes}" readonly/>
+        <br><br>
+
+        Pasien : <br>
+        <select name="pasien">
+            <div th:each="pasien : ${pasienList}">
+                <option th:text="${pasien.nama_pasien}" th:value="${pasien.id_pasien}"></option>
+            </div>
+        </select>
+        <br><br>
+
+        Dokter : <br>
+        <select name="dokter">
+            <div th:each="dokter : ${dokterList}">
+                <option th:text="${dokter.nama_dokter}" th:value="${dokter.id_dokter}"></option>
+            </div>
+        </select>
+        <br><br>
+
+        Waktu Suntik : <br>
+        <input required class="form-control" type="datetime-local" name="waktu_suntik" />
+        <br><br>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <a class="btn btn-primary" th:href="@{/faskes/} + ${id_faskes}">Cancel</a>
+    </form>
+    <br><br>
+</div>
+</body>
+</html>
